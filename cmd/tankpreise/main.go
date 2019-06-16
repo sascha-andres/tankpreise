@@ -12,6 +12,40 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	details, err := gp.Detail(tankpreise.DetailRequest{
+		ID: "24a381e3-0d72-416d-bfd8-b2f65f6e5802",
+	})
+	if err != nil {
+		panic(err)
+	}
+	const padding = 3
+	w := tabwriter.NewWriter(os.Stdout, 0, 2, padding, ' ', 0)
+	_, _ = fmt.Fprintln(w, fmt.Sprintf("ID\t%s", details.Station.ID))
+	_, _ = fmt.Fprintln(w, fmt.Sprintf("Name\t%s", details.Station.Name))
+	_, _ = fmt.Fprintln(w, fmt.Sprintf("Street\t%s %s", details.Station.Street, details.Station.HouseNumber))
+	_, _ = fmt.Fprintln(w, fmt.Sprintf("City\t%d %s", details.Station.PostCode, details.Station.Place))
+	_, _ = fmt.Fprintln(w, fmt.Sprintf("State\t%s", details.Station.State))
+	_, _ = fmt.Fprintln(w, fmt.Sprintf("Brand\t%s", details.Station.Brand))
+	_, _ = fmt.Fprintln(w, "Opening times\t")
+	for _, val := range details.Station.OpeningTimes {
+		_, _ = fmt.Fprintln(w, fmt.Sprintf("\t%s (%s - %s)", val.Text, val.Start, val.End))
+	}
+	for _, val := range details.Station.Overrides {
+		_, _ = fmt.Fprintln(w, fmt.Sprintf("\t%s", val))
+	}
+	_, _ = fmt.Fprintln(w, fmt.Sprintf("Is open\t%t", details.Station.IsOpen))
+	err = w.Flush()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+}
+
+func gasprices() {
+	gp, err := tankpreise.NewGasPrices()
+	if err != nil {
+		panic(err)
+	}
 	p, err := gp.PriceQuery(tankpreise.PricesRequest{
 		IDs: []string{"4429a7d9-fb2d-4c29-8cfe-2ca90323f9f8", "446bdcf5-9f75-47fc-9cfa-2c3d6fda1c3b", "60c0eefa-d2a8-4f5c-82cc-b5244ecae955", "44444444-4444-4444-4444-444444444444"},
 	})

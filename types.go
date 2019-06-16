@@ -94,22 +94,44 @@ type (
 		Prices  map[string]StationPrice `json:"prices"`
 	}
 
+	// DetailRequest is used to get details about a gas station
+	DetailRequest struct {
+		ID string `url:"id"`
+	}
+
+	// DetailResponse contains data returned for a detail request
+	DetailResponse struct {
+		BaseResponse
+		License string  `json:"license"`
+		Data    string  `json:"data"`
+		Status  string  `json:"status"`
+		Station Station `json:"station"`
+	}
+
 	// Station describes a gas station
 	Station struct {
-		ID          string  `json:"id"`
-		Name        string  `json:"name"`
-		Brand       string  `json:"brand"`
-		Street      string  `json:"street"`
-		Place       string  `json:"place"`
-		Lat         float64 `json:"lat"`
-		Lng         float64 `json:"lng"`
-		Dist        float64 `json:"dist"`
-		Diesel      float64 `json:"diesel"`
-		E5          float64 `json:"e5"`
-		E10         float64 `json:"e10"`
-		IsOpen      bool    `json:"isOpen"`
-		HouseNumber string  `json:"houseNumber"`
-		PostCode    int     `json:"postCode"`
+		ID           string `json:"id"`
+		Name         string `json:"name"`
+		Brand        string `json:"brand"`
+		Street       string `json:"street"`
+		HouseNumber  string `json:"houseNumber"`
+		PostCode     int    `json:"postCode"`
+		Place        string `json:"place"`
+		OpeningTimes []struct {
+			Text  string `json:"text"`
+			Start string `json:"start"`
+			End   string `json:"end"`
+		} `json:"openingTimes"`
+		Overrides []string `json:"overrides"`
+		WholeDay  bool     `json:"wholeDay"`
+		IsOpen    bool     `json:"isOpen"`
+		E5        float64  `json:"e5"`
+		E10       float64  `json:"e10"`
+		Diesel    float64  `json:"diesel"`
+		Lat       float64  `json:"lat"`
+		Lng       float64  `json:"lng"`
+		Dist      float64  `json:"dist"`
+		State     string   `json:"state"`
 	}
 )
 
