@@ -8,6 +8,10 @@ import (
 )
 
 func main() {
+
+}
+
+func details() {
 	gp, err := tankpreise.NewGasPrices()
 	if err != nil {
 		panic(err)
