@@ -61,3 +61,9 @@ will return details on the station
     Brand           TOTAL
     Opening times
     Is open         true
+
+## History
+
+|Version|Description|
+|---|---|
+|0.1.0|initial version|
