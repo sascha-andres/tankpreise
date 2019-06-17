@@ -32,8 +32,10 @@ var searchCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		gp, err := tankpreise.NewGasPrices()
 		if err != nil {
-			panic(err)
+			_, _ = fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
 		}
+		gp.SetLicense(viper.GetString("license"))
 		s, err := gp.Search(tankpreise.SearchRequest{
 			GasType:   viper.GetString("search.gas-type"),
 			Latitude:  viper.GetFloat64("search.latitude"),
@@ -42,17 +44,18 @@ var searchCmd = &cobra.Command{
 			Sort:      viper.GetString("search.sort"),
 		})
 		if err != nil {
-			panic(err)
+			_, _ = fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
 		}
 		const padding = 3
 		w := tabwriter.NewWriter(os.Stdout, 0, 2, padding, ' ', 0)
-		_, _ = fmt.Fprintln(w, "Open\tName\tStreet\tZipCode\tCity")
+		_, _ = fmt.Fprintln(w, "ID\tOpen\tName\tStreet\tZipCode\tCity")
 		for _, station := range s.Stations {
-			_, _ = fmt.Fprintln(w, fmt.Sprintf("%t\t%s\t%s\t%d\t%s", station.IsOpen, station.Name, fmt.Sprintf("%s %s", station.Street, station.HouseNumber), station.PostCode, station.Place))
+			_, _ = fmt.Fprintln(w, fmt.Sprintf("%s\t%t\t%s\t%s\t%d\t%s", station.ID, station.IsOpen, station.Name, fmt.Sprintf("%s %s", station.Street, station.HouseNumber), station.PostCode, station.Place))
 		}
 		err = w.Flush()
 		if err != nil {
-			fmt.Println(err)
+			_, _ = fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
 	},
@@ -70,10 +73,10 @@ func init() {
 	searchCmd.Flags().StringP("gas-type", "g", "all", "type of gas you're looking for (diesel, e5, e10 or all)")
 	searchCmd.Flags().StringP("sort", "s", "dist", "sort by (dist)ance or price")
 
-	viper.BindPFlag("search.latitude", searchCmd.Flags().Lookup("latitude"))
-	viper.BindPFlag("search.longitude", searchCmd.Flags().Lookup("longitude"))
-	viper.BindPFlag("search.radius", searchCmd.Flags().Lookup("radius"))
-	viper.BindPFlag("search.gas-type", searchCmd.Flags().Lookup("gas-type"))
-	viper.BindPFlag("search.sort", searchCmd.Flags().Lookup("sort"))
+	_ = viper.BindPFlag("search.latitude", searchCmd.Flags().Lookup("latitude"))
+	_ = viper.BindPFlag("search.longitude", searchCmd.Flags().Lookup("longitude"))
+	_ = viper.BindPFlag("search.radius", searchCmd.Flags().Lookup("radius"))
+	_ = viper.BindPFlag("search.gas-type", searchCmd.Flags().Lookup("gas-type"))
+	_ = viper.BindPFlag("search.sort", searchCmd.Flags().Lookup("sort"))
 
 }
