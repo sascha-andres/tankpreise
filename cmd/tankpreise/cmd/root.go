@@ -53,7 +53,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.tankpreise.yaml)")
 	rootCmd.PersistentFlags().StringVar(&license, "license", "", "License to use, default is demo key")
 
-	viper.BindPFlag("license", rootCmd.PersistentFlags().Lookup("license"))
+	_ = viper.BindPFlag("license", rootCmd.PersistentFlags().Lookup("license"))
 }
 
 // initConfig reads in config file and ENV variables if set.
