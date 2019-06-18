@@ -17,8 +17,9 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"os"
+
+	"github.com/spf13/cobra"
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
@@ -50,7 +51,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.tankpreise.yaml)")
-	rootCmd.PersistentFlags().StringVar(&license, "license", "00000000-0000-0000-0000-000000000002", "License to use, default is demo key")
+	rootCmd.PersistentFlags().StringVar(&license, "license", "", "License to use, default is demo key")
 
 	viper.BindPFlag("license", rootCmd.PersistentFlags().Lookup("license"))
 }
