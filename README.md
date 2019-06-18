@@ -11,7 +11,7 @@ livingit.de/code/tankpreise is a library wrapper for https://creativecommons.tan
 Example usage
 
     gp, err := tankpreise.NewGasPrices()
-    gp.SetLicense("00000000-0000-0000-0000-000000000002")
+    gp.SetLicense("get one")
     p, err := gp.PriceQuery(tankpreise.PricesRequest{
         IDs: stations,
     })

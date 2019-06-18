@@ -51,7 +51,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.tankpreise.yaml)")
-	rootCmd.PersistentFlags().StringVar(&license, "license", "", "License to use, default is demo key")
+	rootCmd.PersistentFlags().StringVar(&license, "license", "", "License to use, head to https://creativecommons.tankerkoenig.de/ -> API-KEY")
 
 	_ = viper.BindPFlag("license", rootCmd.PersistentFlags().Lookup("license"))
 }
