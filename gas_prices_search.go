@@ -1,3 +1,19 @@
+/*
+Copyright © 2019 Sascha Andres <sascha.andres@outlook.com>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 package tankpreise
 
 import (
@@ -10,7 +26,7 @@ type (
 		Latitude  float64 `url:"lat"`  // geographic width of location
 		Longitude float64 `url:"lng"`  // geographic height of location
 		Radius    float64 `url:"rad"`  // Radius to search within
-		GasType   string  `url:"type"` // GasType denotes wich type of gas to lopok for (one of e5, e10, diesel or all)
+		GasType   string  `url:"type"` // GasType denotes which type of gas to lopok for (one of e5, e10, diesel or all)
 		Sort      string  `url:"sort"` // Sort allows to specify whether to search by dist or price, no effect when GasType == all
 	}
 

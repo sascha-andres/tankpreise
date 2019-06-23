@@ -18,5 +18,5 @@ package main
 import "livingit.de/code/tankpreise/cmd/tankpreise/cmd"
 
 func main() {
-  cmd.Execute()
+	cmd.Execute()
 }

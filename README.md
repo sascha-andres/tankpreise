@@ -1,5 +1,7 @@
 # tankpreise
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/sascha-andres/tankpreise)](https://goreportcard.com/report/github.com/sascha-andres/tankpreise) [![codebeat badge](https://codebeat.co/badges/6858bbb0-52de-49ab-abc5-91bb6f58ccc5)](https://codebeat.co/projects/github-com-sascha-andres-tankpreise-master) [![Maintainability](https://api.codeclimate.com/v1/badges/05448cf6c7b102d9e545/maintainability)](https://codeclimate.com/github/sascha-andres/tankpreise/maintainability)
+
 Query prices of gas
 
 Developed using go-modules
@@ -66,5 +68,6 @@ will return details on the station
 
 |Version|Description|
 |---|---|
+|0.2.1|some code cleanup|
 |0.2.0|version with removed confidential info|
 |0.1.0|initial version|
