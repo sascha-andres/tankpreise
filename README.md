@@ -68,5 +68,6 @@ will return details on the station
 
 |Version|Description|
 |---|---|
+|0.2.1|some code cleanup|
 |0.2.0|version with removed confidential info|
 |0.1.0|initial version|
