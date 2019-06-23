@@ -18,14 +18,13 @@ func (gp *GasPrices) do(method, endpoint string, parameters interface{}) ([]byte
 	switch method {
 	case "GET":
 		v, err := query.Values(parameters)
-		if err != nil {
-			return nil, err
+		if err == nil {
+			v.Add("apikey", gp.apiKey)
+			url := strings.TrimSpace(fmt.Sprintf("%s%s?%s\n", gp.apiEndpoint, endpoint, v.Encode()))
+			resp, err = resty.R().Get(url)
 		}
-		v.Add("apikey", gp.apiKey)
-		url := strings.TrimSpace(fmt.Sprintf("%s%s?%s\n", gp.apiEndpoint, endpoint, v.Encode()))
-		resp, err = resty.R().Get(url)
 	default:
-		return nil, errors.New("called with unsupported method")
+		err = errors.New("called with unsupported method")
 	}
 	if err != nil {
 		return nil, err
